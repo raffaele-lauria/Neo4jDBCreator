@@ -196,6 +196,7 @@ public class DesktopBackend implements AutoCloseable {
             LOGGER.debug("New session connected!");
         } catch (Exception ex) {
             LOGGER.error("sessionNewDB raised an exception: " + ex.getLocalizedMessage(), ex, Level.SEVERE);
+            throw ex;
         }
     }
 
@@ -226,6 +227,7 @@ public class DesktopBackend implements AutoCloseable {
         } catch (Neo4jException ex) {
             LOGGER.error("Impossibile eseguire controllaDB.");
             LOGGER.error(ex.getLocalizedMessage());
+            throw ex;
         }
     }
 
