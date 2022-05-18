@@ -55,7 +55,7 @@ public class DBManagementPanel extends javax.swing.JDialog {
     
     private void initLabels(){
         this.welcomeLabel.setText("DROP below the PDF files you want to insert!");
-        this.labelPDFsDrop.setText("** DROP HERE your PDF files **!");
+        this.labelPDFsDrop.setText("** DROP HERE your PDF files **");
         this.updatesLabel.setText("Status updates will be displayed HERE.");
     }
 

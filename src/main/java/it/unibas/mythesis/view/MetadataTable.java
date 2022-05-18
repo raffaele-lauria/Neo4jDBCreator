@@ -22,7 +22,7 @@ public class MetadataTable extends AbstractTableModel{
         this.pdfMetadata = metadata;
     }
 
-    public boolean isVuota(){
+    public boolean isEmpty(){
         if(pdfMetadata.isEmpty() || pdfMetadata == null){
             return true;
         }

@@ -16,6 +16,7 @@ public class Constant {
     public static final String PDF_LIST = "PDF_LIST";
     public static final String AUTHOR_LIST = "AUTHOR_LIST";
     public static final String DEFAULT_DATABASE_NAME = "neo4j";
+    public static final String SYSTEM_DATABASE_NAME = "system";
     public static final String DATABASE_NAME = "unibas";
     public static final String CREATION_YEARS_LIST = "CREATION_YEARS_LIST";
 

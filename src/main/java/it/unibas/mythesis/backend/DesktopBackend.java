@@ -15,13 +15,16 @@ import java.util.logging.Level;
 public class DesktopBackend implements AutoCloseable {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DesktopBackend.class);
-    /* */
+    /*
     // CREDENZIALI DI ACCESSO AL DATABASE prova1
     private String uri = "bolt://localhost:7687";
     private String username = "neo4j";
     private String password = "provapassword";
     //Collegamento proprietà da application.properties -> non riesce a recuperare le credenziali -> Exception in thread "AWT-EventQueue-0" java.lang.NullPointerException: Username can't be null
-
+    */
+    private String uri = "bolt://localhost:7687";
+    private String username = "neo4j";
+    private String password = "unibas";
 
     /* 
     //CREDENZIALI DI ACCESSO AL DATABASE ESTRATTE DAL FILE application.properties
@@ -73,8 +76,9 @@ public class DesktopBackend implements AutoCloseable {
         String dropDatabase = "DROP DATABASE $name IF EXISTS";
         LOGGER.info("Session creation in progress..");
         try {
-            tx = session.beginTransaction();
-            Result result = tx.run(dropDatabase, Values.parameters("name", databaseName));
+            LOGGER.info("Executing oldDBSession..");
+            oldDBSession();
+            session.run(dropDatabase, Values.parameters("name", databaseName));
             LOGGER.info("Drop successfully done.");
         } catch (Neo4jException ex) {
             LOGGER.error("dropDB raised an exception", ex, Level.SEVERE);
@@ -195,7 +199,21 @@ public class DesktopBackend implements AutoCloseable {
             this.session = driver.session(SessionConfig.forDatabase(databaseName));
             LOGGER.debug("New session connected!");
         } catch (Exception ex) {
-            LOGGER.error("sessionNewDB raised an exception: " + ex.getLocalizedMessage(), ex, Level.SEVERE);
+            LOGGER.error("newDBSession raised an exception: " + ex.getLocalizedMessage(), ex, Level.SEVERE);
+            throw ex;
+        }
+    }
+
+    private void oldDBSession() {
+        String databaseName = Constant.DEFAULT_DATABASE_NAME;
+        this.session.close();
+        //CONNECTION WITH DATABASE neo4j
+        try {
+            LOGGER.debug("Connecting with the new session in progress...");
+            this.session = driver.session(SessionConfig.forDatabase(databaseName));
+            LOGGER.debug("New session connected!");
+        } catch (Exception ex) {
+            LOGGER.error("systemDBSession raised an exception: " + ex.getLocalizedMessage(), ex, Level.SEVERE);
             throw ex;
         }
     }

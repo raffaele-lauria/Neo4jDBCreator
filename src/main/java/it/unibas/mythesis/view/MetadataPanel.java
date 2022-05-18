@@ -51,7 +51,7 @@ public class MetadataPanel extends javax.swing.JDialog {
     }
     
     private void initLabels(){
-        this.welcomeLabel.setText("DROP below the PDF file to extract the metadata!");
+        this.welcomeLabel.setText("DROP below the PDF file to extract metadata!");
         this.filePathLabel.setText("**DROP HERE**");
     }
 

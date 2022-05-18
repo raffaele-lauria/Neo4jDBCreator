@@ -45,8 +45,8 @@ public class MetadataPanelControl {
     public class AnalizePDFAction extends AbstractAction{
         
         public AnalizePDFAction(){
-            this.putValue(Action.NAME, "Extract the metadata");
-            this.putValue(Action.SHORT_DESCRIPTION, "Extract the metadata of the selected PDF");
+            this.putValue(Action.NAME, "Extract metadata");
+            this.putValue(Action.SHORT_DESCRIPTION, "Extract metadata from the selected PDF");
         }
         
         @Override
@@ -55,7 +55,7 @@ public class MetadataPanelControl {
             String filePath = (String) Application.getInstance().getModel().getBean(Constant.PATH);
             String parentPath = (String) Application.getInstance().getModel().getBean(Constant.PARENT_PATH);
             MetadataPanel mp = Application.getInstance().getMetadataPanel();
-            if(filePath == null || parentPath == null){
+            if(filePath == null){
                 logger.info("No file specified!");
                 mp.setFilePathLabel("No file specified! Try again.");
                 return;
@@ -79,7 +79,7 @@ public class MetadataPanelControl {
         
         //Extract metadata
         private void extractMetadataPDF(PDDocument pdf) {
-            Application.getInstance().getModel().putBean(Constant.PDF_METADATA, null);
+            //Application.getInstance().getModel().putBean(Constant.PDF_METADATA, null);
             List<Metadata> metadataPDF = new ArrayList<>();
             PDDocumentInformation metadati = pdf.getDocumentInformation();
             metadataPDF.add(new Metadata("Title", metadati.getTitle()));
@@ -103,9 +103,9 @@ public class MetadataPanelControl {
             }
             Application.getInstance().getModel().putBean(Constant.PDF_METADATA, metadataPDF);
             if(metadataPDF.isEmpty()){
-                //logger.debug("Metadata list empty!");
+                logger.info("Metadata list empty!");
             } else {
-                //logger.debug("Metadata list NOT empty.");
+                logger.info("Metadata list NOT empty.");
             }
         }
     }

@@ -366,7 +366,7 @@ public class DBManagementPanelControl {
         try {
             var pdf = PDDocument.load(file);
             String author = pdf.getDocumentInformation().getAuthor();
-            if (!author.isEmpty() || author == null) {
+            if (author != null && !author.isEmpty()) {
                 return author;
             }
             pdf.close();

@@ -31,10 +31,10 @@ public class MetadataTablePanel extends javax.swing.JDialog {
     public void initialize(){
         initComponents();
         initLabels();
-        initTable();
     }
     
     public void open(){
+        initTable();
         this.pack();
         this.setLocationRelativeTo(this.getParent());
         this.setVisible(true);
